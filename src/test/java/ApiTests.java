@@ -58,6 +58,8 @@ public class ApiTests {
                 .body("data[1].email", Matchers.equalTo("lindsay.ferguson@reqres.in"));
     }
 
+
+    // Пример выполнения post запроса с формированием тела запроса из строки (String user)
     @Test
     public void createUser_1() {
         String user = "{\n" +
@@ -79,6 +81,8 @@ public class ApiTests {
                 .statusCode(201);
     }
 
+
+//    Пример выполнения post запроса с формированием тела запроса из класса (CreateUser)
     @Test
     public void createUser_2() {
         String name = "morpheus";
@@ -100,6 +104,8 @@ public class ApiTests {
                 .body("job", Matchers.equalTo("leader"));
     }
 
+//    Пример выполнения post запроса с формированием тела запроса из класса (CreateUser)
+//    и записи тела ответа в класс (CreateUserResp)
     @Test
     public void createUser_3() {
         CreateUser user = new CreateUser("morpheus", "leader");
@@ -120,6 +126,7 @@ public class ApiTests {
         Assert.assertTrue(createUserResp.createdAt.contains(LocalDate.now().toString()));
     }
 
+//    Пример выполнения get запроса с записью ответа в класс со сложной структурой (GetUserListResp)
     @Test
     public void getUserLisRespClass() {
         GetUserListResp getUserListResp = RestAssured.given()
@@ -132,7 +139,6 @@ public class ApiTests {
                 .extract().as(GetUserListResp.class);
 
         Assert.assertEquals(getUserListResp.data.get(3).first_name, "Byron");
-
     }
 
 }
